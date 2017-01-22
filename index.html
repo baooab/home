@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>张宝的个人网站</title>
+    <link rel="stylesheet" type="text/css" href="./css/bulma/bulma.css">
+    <!--
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    -->
+    <style type="text/css">
+        section.hero {
+            background: url('./img/bg.jpg') no-repeat;
+            background-size: cover;
+            background-position: center;
+            transition: all 2s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero is-dark is-fullheight" style="font-family: Mingliu">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            我，<span id="user-name">张宝</span>
+          </h1>
+          <h2>
+            <p>今天是 <span id="today">2017年1月17号，周二</span>。<span id="this-year">2017</span> 年已经过去了 <span id="percentage-this-year"></span>%。</p>
+            <p>今天也是我出生的第 <span id="how-many-days-from-my-birthday">9053</span> 天，<span id="how-old-i-am">24</span>岁了。</p>
+          </h2>
+        </div>
+      </div>
+      <div class="hero-foot">
+        <nav class="tabs">
+          <div class="container">
+            <ul>
+              <li class="is-active"><a href="https://github.com/baooab/home">进入</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </section>
+
+    <script type="text/javascript" src="./js/vendor/moment.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            var user = {'name': '张宝', 'birthday': [1992, 3, 5]};
+            //var user = {'name': '张宝', 'birthday': [1987, 10, 27]};
+
+            // http://momentjs.cn/docs/#/use-it/
+            moment.locale('en', {
+                weekdays : "周日_周一_周二_周三_周四_周五_周六".split("_"),
+            });
+
+            // http://www.ruanyifeng.com/blog/2013/05/jquery-free.html
+            function $$(selector, context) {
+                context = context || document;
+                var elements = context.querySelectorAll(selector);
+                return Array.prototype.slice.call(elements);
+            }
+
+            var birthday = moment(user.birthday);
+            var today = moment();
+            var this_year = today.get('years');
+            var this_year_first_day = moment(new Date(this_year - 1, 11, 31));
+            var how_many_days_from_my_birthday = today.diff(birthday, 'days');
+            var how_many_days_from_this_year_including_first_day = today.diff(this_year_first_day, 'days');
+            var how_many_days_this_year = today.isLeapYear() ? 366 : 365;
+            var percentage_this_year = ((how_many_days_from_this_year_including_first_day / how_many_days_this_year)* 100).toFixed(1);
+            var how_old_i_am = (how_many_days_from_my_birthday / how_many_days_this_year).toFixed(1);
+            $$('#user-name')[0].innerText = user.name;
+            $$('#today')[0].innerText = moment().format('YYYY年M月DDD日，dddd');
+            $$('#this-year')[0].innerText = this_year;
+            $$('#percentage-this-year')[0].innerText = percentage_this_year;
+            $$('#how-old-i-am')[0].innerText = how_old_i_am;
+            $$('#how-many-days-from-my-birthday')[0].innerText = how_many_days_from_my_birthday;
+        })();
+    </script>
+</body>
+</html>
