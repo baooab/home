@@ -70,7 +70,7 @@
             var percentage_this_year = ((how_many_days_from_this_year_including_first_day / how_many_days_this_year)* 100).toFixed(1);
             var how_old_i_am = (how_many_days_from_my_birthday / how_many_days_this_year).toFixed(1);
             $$('#user-name')[0].innerText = user.name;
-            $$('#today')[0].innerText = moment().format('YYYY年M月DDD日，dddd');
+            $$('#today')[0].innerText = moment().format('YYYY年M月D日，dddd');
             $$('#this-year')[0].innerText = this_year;
             $$('#percentage-this-year')[0].innerText = percentage_this_year;
             $$('#how-old-i-am')[0].innerText = how_old_i_am;
